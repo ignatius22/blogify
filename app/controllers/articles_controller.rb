@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def index
-		@articles = Article.paginate(page: params[:page], per_page: 3)
+		@articles = Article.paginate(page: params[:page], per_page: 2)
 	end
 
 	def new
@@ -44,7 +44,7 @@ private
 		@article = Article.find(params[:id])
 	end
 	def article_params
-		params.require(:article).permit(:title, :description)
+		params.require(:article).permit(:title, :description, category_ids: [])
 	end
 	def require_same_user
 		if current_user != @article.user && !current_user.admin?
